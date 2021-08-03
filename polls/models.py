@@ -12,7 +12,9 @@ class Question(models.Model):
         return self.question_text
 
     def was_published_recently(self):
-        return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+        # return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+        now = timezone.now()
+        return now - datetime.timedelta(days=1) <= self.pub_date <= now
 
 # 선택지에 해당하는 질문, 투표 수 
 # 외래키 : 외부 Question 클래스 참조
@@ -23,3 +25,5 @@ class Choice(models.Model):
     
     def __str__(self):
         return self.choice_text
+
+
